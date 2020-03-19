@@ -1,0 +1,32 @@
+{
+    "name": "amsify42/php-command-line",
+    "description": "This is a php package for dealing with command line parameters",
+    "keywords": ["php","command line","cli", "cli parameters", "command line parameters"],
+    "homepage": "https://github.com/amsify42/php-command-line",
+    "type": "library",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit":  "^7.0"
+    },
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Amsify42",
+            "email": "amsify42@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Amsify42\\CommandLine\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amsify42\\Tests\\": "tests/"
+        }
+    },
+    "license": "MIT"
+}
