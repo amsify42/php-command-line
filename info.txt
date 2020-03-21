@@ -1,0 +1,3 @@
+Sample commands
+
+> -name=amsify -id 42 --global -isBool true -price 42.24 -message "Some message"

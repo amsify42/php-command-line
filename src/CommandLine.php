@@ -2,7 +2,7 @@
 
 namespace Amsify42\CommandLine;
 
-use Amsify42\CommandLine\Data\Evaluate;
+use Amsify42\PHPVarsData\Data\Evaluate;
 
 class CommandLine
 {
@@ -16,6 +16,11 @@ class CommandLine
 	 * @var array
 	 */
 	private static $goKeys = [];
+	/**
+	 * Collects double hyphen keys if passed
+	 * @var array
+	 */
+	private static $dhKeys = [];
 	/**
 	 * All cli params
 	 * @var array
@@ -38,6 +43,9 @@ class CommandLine
 		{
 			foreach(self::$params as $key => $value)
 			{
+				/**
+				 * If the key name is numeric, it will assume the param to be passed without key name
+				 */
 				if(is_numeric($key))
 				{
 					self::$string .= Evaluate::toString($value).' ';	
@@ -45,9 +53,18 @@ class CommandLine
 				else
 				{
 					/**
-					 * Key is of getopt
+					 * If key is of double hyphen
 					 */
-					if(in_array($key, self::$goKeys))
+					$isDH = false;
+					if(in_array($key, self::$dhKeys))
+					{
+						$isDH = true;
+						self::$string .= '--'.$key.' ';
+					}
+					/**
+					 * If key is of getopt
+					 */
+					else if(in_array($key, self::$goKeys))
 					{
 						self::$string .= '-'.$key.' ';
 					}
@@ -55,7 +72,13 @@ class CommandLine
 					{
 						self::$string .= '-'.$key.'=';
 					}
-					self::$string .= Evaluate::toString($value).' ';
+					/**
+					 * Assign value if param is not of type double hyphen
+					 */
+					if(!$isDH)
+					{
+						self::$string .= Evaluate::toString($value, true).' ';
+					}
 				}
 			}
 			self::$string = trim(self::$string);
@@ -105,7 +128,12 @@ class CommandLine
 					 */
 				    else if(preg_match('/^--([^--]+)(.*)/', $_SERVER['argv'][$i], $match))
 				    {
-				        self::$params[trim($match[1])] = true;
+				    	$dhKey = trim($match[1]);
+				    	if(!in_array($dhKey, self::$dhKeys))
+						{
+							self::$dhKeys[] = $dhKey;
+						}
+				        self::$params[$dhKey] = true;
 				    }
 				    /**
 				     * else will assign to argv key value
