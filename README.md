@@ -9,7 +9,7 @@ $ composer require amsify42/php-command-line
 1. [Introduction](#1-introduction)
 2. [Getting Parameters](#2-getting-parameters)
 3. [Double Hyphen Param](#3-double-hyphen-param)
-4. [To String](#3-to-string)
+4. [To String](#4-to-string)
 
 ### 1. Introduction
 The class `Amsify42\CommandLine\CommandLine` class helps get the cli parameter passed in any of the format.
