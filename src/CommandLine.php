@@ -117,16 +117,16 @@ class CommandLine
 				        self::$params[trim($match[1])] = Evaluate::toValue($match[2]);
 				    }
 				    /**
-					 * If pattern matches param like getopt
+					 * If pattern matches param like getopt -{key}
 					 */
 				    else if(preg_match('/^-([^-]+)(.*)/', $_SERVER['argv'][$i], $match))
 				    {
 				        $getOptKey = trim($match[1]);
 				    }
 				    /**
-					 * If pattern matches with double hiphen
+					 * If pattern matches with double hiphen --{key}
 					 */
-				    else if(preg_match('/^--([^--]+)(.*)/', $_SERVER['argv'][$i], $match))
+				    else if(preg_match('/^--(.*)/', $_SERVER['argv'][$i], $match))
 				    {
 				    	$dhKey = trim($match[1]);
 				    	if(!in_array($dhKey, self::$dhKeys))
