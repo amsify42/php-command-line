@@ -7,7 +7,7 @@ use Amsify42\CommandLine\CommandLine;
 
 final class GetParamsTest extends TestCase
 {
-    private $sampleCLIParams = '-name=amsify -id 42 --global -isBool true -price 42.24 -message';
+    private $sampleCLIParams = '-name=amsify -id 42 --global -isBool true -price 42.24 --some-more -message';
     private $paramsArr = [];
 
     public function testGetParams()
@@ -28,6 +28,7 @@ final class GetParamsTest extends TestCase
 
         $this->assertSame(42, CommandLine::getParam('id'));
         $this->assertSame(42.24, cli_get_param('price'));
+        $this->assertTrue(CommandLine::isParam('some-more'));
         $this->assertEquals('Some message', CommandLine::getParam('message'));
     }
 
