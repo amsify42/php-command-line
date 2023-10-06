@@ -85,6 +85,13 @@ class CommandLine
 		}
 	}
 
+	public static function setParams($params)
+	{
+		self::$loaded = true;
+		self::$string = NULL;
+		self::$params = $params;
+	}
+
 	public static function loadParams()
 	{
 		if(!self::$loaded)
