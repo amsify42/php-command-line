@@ -174,7 +174,7 @@ class Task
         }
 
         if ($isBackground) {
-            $command .= " >" . ($sameLog ? ">" : "") . " " . (($logPath) ? $logPath : '/dev/null') . " 2>&1 & echo $!";
+            $command .= " >" . ($sameLog ? ">" : "") . " " . (($logPath) ? $logPath : ($isWindows? 'NUL': '/dev/null')) . " 2>&1 & echo $!";
         }
 
         if ($beforeExec !== NULL) {
